@@ -17,6 +17,10 @@
 #include "Utilities.h"
 #include "CategoryDlg.h"
 #include "SampleCodeDlg.h"
+#include "SelectDevEnvDlg.h"
+#include "BoostHelpDlg.h"
+#include "GoogleHelpDlg.h"
+#include "NUnitHelpDlg.h"
 #include "AboutDlg.h"
 #include "ArgumentsDlg.h"
 #include "ExeRunner.h"
@@ -102,7 +106,8 @@ CMainFrame::CMainFrame(const std::wstring& fileName, const std::wstring& argumen
 	m_logAutoClear(true),
 	m_randomize(false),
 	m_repeat(false),
-	m_debugger(false)
+	m_debugger(false),
+	m_devEnv([this](const std::vector<std::wstring>& names, int indexHint) { return SelectDevEnv(names, indexHint); })
 {
 }
 
@@ -877,7 +882,7 @@ void CMainFrame::test_waiting(const std::wstring& processName, unsigned processI
 {
 	EnQueue([this, processName, processId]()
 	{
-		if (this->MessageBox(
+		if (m_devEnv.AttachDebugger(processId) || this->MessageBox(
 			WStr(wstringbuilder() << L"Attach debugger to " << processName << L", pid: "<< processId),
 			LoadString(IDR_APPNAME).c_str(),
 			MB_OKCANCEL) == IDOK)
@@ -987,6 +992,15 @@ void CMainFrame::EndTestCase(unsigned id, unsigned long /*elapsed*/, TestCaseSta
 	m_progressBar.OffsetPos(1);
 	UpdateStatusBar();
 	UpdateProgressBar();
+}
+
+int CMainFrame::SelectDevEnv(const std::vector<std::wstring>& names, int indexHint)
+{
+	SelectDevEnvDlg dlg(names, indexHint);
+	if (dlg.DoModal() != IDOK)
+		return indexHint;
+
+	return dlg.GetIndex();
 }
 
 void CMainFrame::test_suite_finish(unsigned id, unsigned long /*elapsed*/)
@@ -1399,6 +1413,11 @@ void CMainFrame::Run()
 		m_logView.Clear();
 	m_resetTimer = m_logView.Empty();
 	m_pRunner->Run(m_combo.GetCurSel(), GetOptions(), m_arguments);
+}
+
+DevEnv& CMainFrame::getDevEnv()
+{
+	return m_devEnv;
 }
 
 void TreeViewStateStorage::Clear()

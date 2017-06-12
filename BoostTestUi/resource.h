@@ -32,6 +32,23 @@
 #define IDD_ARGUMENTS                   216
 #define IDD_FIND                        217
 #define IDI_WARN                        218
+#define IDR_GTEST_GUI_H                 201
+#define IDR_BOOSTTESTSAMPLE_RTF         202
+#define IDR_GOOGLETESTSAMPLE_RTF        203
+#define IDR_NUNITSAMPLE_RTF             204
+#define IDI_EMPTY                       205
+#define IDI_RUN                         206
+#define IDI_TICK                        207
+#define IDI_CROSS                       208
+#define IDR_LOGLEVEL_MENU               209
+#define IDR_TREE_CONTEXTMENU            210
+#define IDD_AUTORUN                     211
+#define IDI_TICKG                       212
+#define IDD_CATEGORIES                  213
+#define IDD_ARGUMENTS                   214
+#define IDD_FIND                        215
+#define IDI_WARN                        216
+#define IDD_SELECT_DEVENV               217
 #define IDC_TREEVIEW                    1000
 #define IDC_PROGRESSBAR                 1001
 #define IDC_LOGVIEW                     1002
@@ -60,6 +77,7 @@
 #define IDC_TEXT                        1028
 #define IDC_PREVIOUS                    1029
 #define IDC_NEXT                        1030
+#define IDC_DEVENV_LIST                 1031
 #define ID_TEST_ABORT                   32773
 #define ID_LOG_SELECTALL                32776
 #define ID_LOG_CLEARSELECTION           32777
@@ -106,9 +124,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        217
+#define _APS_NEXT_RESOURCE_VALUE        218
 #define _APS_NEXT_COMMAND_VALUE         32822
-#define _APS_NEXT_CONTROL_VALUE         1031
+#define _APS_NEXT_CONTROL_VALUE         1032
 #define _APS_NEXT_SYMED_VALUE           104
 #endif
 #endif
